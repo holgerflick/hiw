@@ -1,9 +1,9 @@
 object Form2: TForm2
   Left = 0
   Top = 0
-  Caption = 'Form2'
+  Caption = 'Base64 Encoding'
   ClientHeight = 513
-  ClientWidth = 936
+  ClientWidth = 1020
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,7 +12,7 @@ object Form2: TForm2
   Font.Style = []
   PixelsPerInch = 96
   DesignSize = (
-    936
+    1020
     513)
   TextHeight = 21
   object Image: TImage
@@ -1791,38 +1791,56 @@ object Form2: TForm2
   object Input: TEdit
     Left = 392
     Top = 16
-    Width = 536
+    Width = 620
     Height = 29
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
-    Text = 'Input'
+    Text = 'This is  a test.'
     ExplicitWidth = 489
   end
   object Memo: TMemo
     Left = 392
-    Top = 136
-    Width = 536
-    Height = 351
+    Top = 96
+    Width = 620
+    Height = 391
     Anchors = [akLeft, akTop, akRight, akBottom]
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'JetBrains Mono'
+    Font.Style = []
     Lines.Strings = (
       'Memo')
+    ParentFont = False
+    ScrollBars = ssVertical
     TabOrder = 1
-    ExplicitHeight = 344
+    ExplicitWidth = 536
   end
   object btnEncodeText: TButton
     Left = 392
-    Top = 56
+    Top = 51
     Width = 209
     Height = 25
     Caption = 'Encode Text'
     TabOrder = 2
+    OnClick = btnEncodeTextClick
   end
   object btnEncodeImage: TButton
     Left = 607
-    Top = 56
-    Width = 209
+    Top = 51
+    Width = 162
     Height = 25
     Caption = 'Encode Image'
     TabOrder = 3
+    OnClick = btnEncodeImageClick
+  end
+  object btnDecodeImage: TButton
+    Left = 775
+    Top = 51
+    Width = 162
+    Height = 25
+    Caption = 'Decode Image'
+    TabOrder = 4
+    OnClick = btnDecodeImageClick
   end
 end

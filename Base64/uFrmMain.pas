@@ -14,8 +14,15 @@ type
     Memo: TMemo;
     btnEncodeText: TButton;
     btnEncodeImage: TButton;
+    btnDecodeImage: TButton;
+    procedure btnEncodeImageClick(Sender: TObject);
+    procedure btnEncodeTextClick(Sender: TObject);
+    procedure btnDecodeImageClick(Sender: TObject);
   private
+    function GetBase64: String;
+    procedure SetBase64(const Value: String);
     { Private declarations }
+    property Base64: String read GetBase64 write SetBase64;
   public
     { Public declarations }
   end;
@@ -26,5 +33,65 @@ var
 implementation
 
 {$R *.dfm}
+
+uses
+  System.NetEncoding, TMSFNCUtils;
+
+procedure TForm2.btnDecodeImageClick(Sender: TObject);
+var
+  LOutput: TMemoryStream;
+  LInput: TMemoryStream;
+
+begin
+  LInput := TMemoryStream.Create;
+  LOutput := TMemoryStream.Create;
+  try
+    Memo.Lines.SaveToStream(LInput);
+    LInput.Position := 0;
+    TNetEncoding.Base64.Decode(LInput, LOutput);
+    LOutput.Position := 0;
+    Image.Picture.LoadFromStream(LOutput);
+  finally
+    LOutput.Free;
+    LInput.Free;
+  end;
+
+end;
+
+procedure TForm2.btnEncodeImageClick(Sender: TObject);
+var
+  LStream: TMemoryStream;
+  LOutput: TStringStream;
+
+begin
+  LStream := TMemoryStream.Create;
+  LOutput := TStringStream.Create;
+  try
+    Image.Picture.SaveToStream(LStream);
+    LStream.Position := 0;
+
+    Memo.Lines.Clear;
+    TNetEncoding.Base64.Encode(LStream, LOutput);
+    Base64 := LOutput.DataString;
+  finally
+    LOutput.Free;
+    LStream.Free;
+  end;
+end;
+
+procedure TForm2.btnEncodeTextClick(Sender: TObject);
+begin
+  Base64 := TNetEncoding.Base64.Encode(Input.Text);
+end;
+
+function TForm2.GetBase64: String;
+begin
+  Result := Memo.Lines.Text;
+end;
+
+procedure TForm2.SetBase64(const Value: String);
+begin
+  Memo.Lines.Text := Value;
+end;
 
 end.
