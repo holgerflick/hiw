@@ -1796,7 +1796,6 @@ object Form2: TForm2
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     Text = 'This is  a test.'
-    ExplicitWidth = 489
   end
   object Memo: TMemo
     Left = 392
@@ -1814,7 +1813,6 @@ object Form2: TForm2
     ParentFont = False
     ScrollBars = ssVertical
     TabOrder = 1
-    ExplicitWidth = 536
   end
   object btnEncodeText: TButton
     Left = 392
