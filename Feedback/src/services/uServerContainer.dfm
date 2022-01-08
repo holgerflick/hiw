@@ -8,9 +8,11 @@ object ServerContainer: TServerContainer
     Top = 16
   end
   object XDataServer: TXDataServer
-    BaseUrl = 'http://+:2001/tms/xdata'
+    BaseUrl = 'http://+:2112/'
     Dispatcher = SparkleHttpSysDispatcher
     EntitySetPermissions = <>
+    SwaggerOptions.Enabled = True
+    SwaggerUIOptions.Enabled = True
     Left = 216
     Top = 16
   end
