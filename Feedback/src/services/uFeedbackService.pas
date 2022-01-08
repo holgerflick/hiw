@@ -13,6 +13,15 @@ type
 
     [HttpPost]
     procedure AddSuggestion( [FromBody] ASuggestion: TPrxAddSuggestion );
+
+    [HttpGet]
+    function Areas: TPrxAreas;
+
+    [HttpGet]
+    function Products: TPrxProducts;
+
+    [HttpGet]
+    function Stati: TPrxStati;
   end;
 
 implementation

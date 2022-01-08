@@ -12,6 +12,11 @@ type
   [ServiceImplementation]
   TFeedbackService = class(TInterfacedObject, IFeedbackService)
     procedure AddSuggestion( ASuggestion: TPrxAddSuggestion );
+
+    function Areas: TPrxAreas;
+    function Products: TPrxProducts;
+    function Stati: TPrxStati;
+    function References: TPrxReferences;
   end;
 
 implementation
@@ -25,6 +30,26 @@ uses
 procedure TFeedbackService.AddSuggestion(ASuggestion: TPrxAddSuggestion);
 begin
   TDbManager.Shared.AddSuggestion( ASuggestion );
+end;
+
+function TFeedbackService.Areas: TPrxAreas;
+begin
+  Result := TDbManager.Shared.GetAreas;
+end;
+
+function TFeedbackService.Products: TPrxProducts;
+begin
+  Result := TDbManager.Shared.GetProducts;
+end;
+
+function TFeedbackService.References: TPrxReferences;
+begin
+  Result := TDbManager.Shared.GetReferenceData;
+end;
+
+function TFeedbackService.Stati: TPrxStati;
+begin
+  Result := TDbManager.Shared.GetStati;
 end;
 
 initialization
