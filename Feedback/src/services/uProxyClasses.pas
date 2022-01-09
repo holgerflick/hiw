@@ -11,11 +11,12 @@ type
     FSuggestion: String;
     FContact: String;
     FEmail: String;
-    FComment: String;
+    FDetails: String;
   published
     property Suggestion: String read FSuggestion write FSuggestion;
     property Contact: String read FContact write FContact;
     property Email: String read FEmail write FEmail;
+    property Details: String read FDetails write FDetails;
   end;
 
   TPrxStatus = class

@@ -1,19 +1,19 @@
 object DbManager: TDbManager
   OnCreate = DataModuleCreate
-  Height = 536
-  Width = 508
-  PixelsPerInch = 192
+  Height = 268
+  Width = 254
+  PixelsPerInch = 96
   object Manager: TFDManager
     FormatOptions.AssignedValues = [fvMapRules]
     FormatOptions.OwnMapRules = True
     FormatOptions.MapRules = <>
     Active = True
-    Left = 128
-    Top = 96
+    Left = 64
+    Top = 48
   end
   object DriverLink: TFDPhysFBDriverLink
     DriverID = 'FB4'
-    Left = 120
-    Top = 240
+    Left = 60
+    Top = 120
   end
 end

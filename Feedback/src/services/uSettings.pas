@@ -79,6 +79,7 @@ var
   LDefaultLibraryFileName: String;
   LFallback: Boolean;
   LErrMsg: String;
+
 begin
   LDefaultLibraryFilename := TPath.Combine( LibPath, 'fbclient.dll' );
   Result := GetIniValue( 'Firebird', 'VendorLib', LDefaultLibraryFileName );
@@ -98,9 +99,7 @@ begin
      [Result]);
   end;
 end;
-// Class-methods; they work on the class, not on an object instance
-//
-// - only FInstance is visible to the class because it is a class var!!!
+
 procedure TSettings.AssignConnectionParams(AParams: TStrings);
 var
   LIniFile: TIniFile;
@@ -117,6 +116,7 @@ class destructor TSettings.Destroy;
 begin
    FInstance.Free;
 end;
+
 class function TSettings.Shared: TSettings;
 begin
   if not Assigned( FInstance ) then

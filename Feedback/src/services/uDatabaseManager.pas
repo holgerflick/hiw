@@ -31,7 +31,7 @@ type
     class destructor Destroy;
     class function Shared: TDbManager;
 
-    procedure AddSuggestion( AProxy: TPrxAddSuggestion );
+    function AddSuggestion( AProxy: TPrxAddSuggestion ): String;
     function GetProducts: TPrxProducts;
     function GetAreas: TPrxAreas;
     function GetStati: TPrxStati;
@@ -42,6 +42,7 @@ type
 implementation
 
 uses
+  System.NetEncoding,
   DateUtils,
   IOUtils,
   uSettings;
@@ -51,7 +52,11 @@ uses
 
 {$R *.dfm}
 
-procedure TDbManager.AddSuggestion(AProxy: TPrxAddSuggestion);
+function TDbManager.AddSuggestion(AProxy: TPrxAddSuggestion): String;
+const
+  SQLAddSuggestion = 'INSERT INTO SUGGESTIONS ' +
+      '( ID, RECEIVED, SUGGESTION, CONTACT, EMAIL, DETAILS ) ' +
+      'VALUES ( :ID, :RECEIVED, :SUGGESTION, :CONTACT, :EMAIL, :DETAILS )';
 var
   LQuery: TFDQuery;
 
@@ -63,15 +68,19 @@ begin
 
   LQuery := GetQuery;
   try
-    LQuery.SQL.Text := 'INSERT INTO SUGGESTIONS ( RECEIVED, SUGGESTION, CONTACT, EMAIL, DETAILS ) ' +
-      'VALUES ( :RECEIVED, :SUGGESTION, :CONTACT, :EMAIL, :DETAILS )';
+    var LGuid := TGuid.NewGuid;
+    LQuery.SQL.Text := SQLAddSuggestion;
+    LQuery.ParamByName('ID').AsGUID := LGuid;
     LQuery.ParamByName('RECEIVED').AsDateTime := TTimeZone.Local.ToUniversalTime(Now);
     LQuery.ParamByName('SUGGESTION').AsString := AProxy.Suggestion;
     LQuery.ParamByName('CONTACT').AsString := AProxy.Contact;
     LQuery.ParamByName('EMAIL').AsString := AProxy.Email;
     LQuery.ParamByName('DETAILS').AsString := AProxy.Details;
     LQuery.ExecSQL;
+
+    Result := TNetEncoding.Base64.Encode( LGuid.ToString );
   finally
+
     ReleaseQuery( LQuery );
   end;
 end;
@@ -158,6 +167,7 @@ begin
     LParams := TStringlist.Create;
     try
       TSettings.Shared.AssignConnectionParams( LParams );
+      LParams.Add('ExtendedMetadata=True');
       Manager.AddConnectionDef(CDef, DriverLink.DriverID, LParams, False );
     finally
       LParams.Free;

@@ -12,7 +12,7 @@ type
     ['{9EF2F8D0-F82D-40D1-93CE-AC2E57BA88EA}']
 
     [HttpPost]
-    procedure AddSuggestion( [FromBody] ASuggestion: TPrxAddSuggestion );
+    function AddSuggestion( [FromBody] ASuggestion: TPrxAddSuggestion ): String;
 
     [HttpGet]
     function Areas: TPrxAreas;
@@ -22,6 +22,12 @@ type
 
     [HttpGet]
     function Stati: TPrxStati;
+
+    [HttpGet]
+    function References: TPrxReferences;
+
+
+
   end;
 
 implementation
