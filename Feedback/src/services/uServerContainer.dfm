@@ -1,11 +1,11 @@
 object ServerContainer: TServerContainer
-  Height = 210
-  Width = 431
-  PixelsPerInch = 96
+  Height = 420
+  Width = 862
+  PixelsPerInch = 192
   object SparkleHttpSysDispatcher: TSparkleHttpSysDispatcher
     Active = True
-    Left = 72
-    Top = 16
+    Left = 144
+    Top = 32
   end
   object XDataServer: TXDataServer
     BaseUrl = 'http://+:2112/'
@@ -13,7 +13,10 @@ object ServerContainer: TServerContainer
     EntitySetPermissions = <>
     SwaggerOptions.Enabled = True
     SwaggerUIOptions.Enabled = True
-    Left = 216
-    Top = 16
+    Left = 432
+    Top = 32
+    object XDataServerCORS: TSparkleCorsMiddleware
+      Origin = '*'
+    end
   end
 end

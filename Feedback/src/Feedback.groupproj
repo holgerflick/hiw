@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E8203BC6-1CCF-4CE6-9FDE-4255862BC02E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="services\FeedbackServices.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="web\FeedbackWeb.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FeedbackServices">
+        <MSBuild Projects="services\FeedbackServices.dproj"/>
+    </Target>
+    <Target Name="FeedbackServices:Clean">
+        <MSBuild Projects="services\FeedbackServices.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FeedbackServices:Make">
+        <MSBuild Projects="services\FeedbackServices.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FeedbackWeb">
+        <MSBuild Projects="web\FeedbackWeb.dproj"/>
+    </Target>
+    <Target Name="FeedbackWeb:Clean">
+        <MSBuild Projects="web\FeedbackWeb.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FeedbackWeb:Make">
+        <MSBuild Projects="web\FeedbackWeb.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FeedbackServices;FeedbackWeb"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FeedbackServices:Clean;FeedbackWeb:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FeedbackServices:Make;FeedbackWeb:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

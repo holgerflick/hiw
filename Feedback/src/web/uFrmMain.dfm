@@ -1,0 +1,119 @@
+object FrmMain: TFrmMain
+  Width = 958
+  Height = 688
+  CSSLibrary = cssBootstrap
+  ElementFont = efCSS
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -30
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  ParentFont = False
+  OnCreate = WebFormCreate
+  OnShow = WebFormShow
+  object txtSuggestion: TWebEdit
+    Left = 48
+    Top = 64
+    Width = 850
+    Height = 44
+    Margins.Left = 6
+    Margins.Top = 6
+    Margins.Right = 6
+    Margins.Bottom = 6
+    ElementClassName = 'form-control'
+    ElementFont = efCSS
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    Text = 'txtSuggestion'
+    WidthPercent = 100.000000000000000000
+  end
+  object txtDetails: TWebMemo
+    Left = 48
+    Top = 160
+    Width = 850
+    Height = 178
+    Margins.Left = 6
+    Margins.Top = 6
+    Margins.Right = 6
+    Margins.Bottom = 6
+    AutoSize = False
+    ElementClassName = 'form-control'
+    ElementFont = efCSS
+    HeightPercent = 100.000000000000000000
+    Lines.Strings = (
+      'txtDetails')
+    SelLength = 0
+    SelStart = 0
+    WidthPercent = 100.000000000000000000
+  end
+  object txtName: TWebEdit
+    Left = 48
+    Top = 384
+    Width = 850
+    Height = 44
+    Margins.Left = 6
+    Margins.Top = 6
+    Margins.Right = 6
+    Margins.Bottom = 6
+    ChildOrder = 2
+    ElementClassName = 'form-control'
+    ElementFont = efCSS
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    Text = 'txtName'
+    WidthPercent = 100.000000000000000000
+  end
+  object txtMail: TWebEdit
+    Left = 48
+    Top = 480
+    Width = 850
+    Height = 44
+    Margins.Left = 6
+    Margins.Top = 6
+    Margins.Right = 6
+    Margins.Bottom = 6
+    ChildOrder = 3
+    ElementClassName = 'form-control'
+    ElementFont = efCSS
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    Text = 'txtMail'
+    WidthPercent = 100.000000000000000000
+  end
+  object btnSendSuggestion: TWebButton
+    Left = 496
+    Top = 576
+    Width = 402
+    Height = 50
+    Margins.Left = 6
+    Margins.Top = 6
+    Margins.Right = 6
+    Margins.Bottom = 6
+    Caption = 'Send Suggestion'
+    ChildOrder = 4
+    ElementClassName = 'btn btn-success'
+    ElementFont = efCSS
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+    OnClick = btnSendSuggestionClick
+  end
+  object btnReset: TWebButton
+    Left = 48
+    Top = 576
+    Width = 192
+    Height = 50
+    Margins.Left = 6
+    Margins.Top = 6
+    Margins.Right = 6
+    Margins.Bottom = 6
+    Caption = 'Reset'
+    ChildOrder = 4
+    ElementClassName = 'btn btn-danger'
+    ElementFont = efCSS
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+    OnClick = btnResetClick
+  end
+end
