@@ -1,4 +1,4 @@
-unit uServerContainer;
+﻿unit uServerContainer;
 
 interface
 
@@ -20,6 +20,8 @@ var
   ServerContainer: TServerContainer;
 
 implementation
+
+
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 

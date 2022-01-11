@@ -1,25 +1,21 @@
 object FrmMain: TFrmMain
-  Width = 958
-  Height = 688
+  Width = 479
+  Height = 344
   CSSLibrary = cssBootstrap
   ElementFont = efCSS
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -30
+  Font.Height = -15
   Font.Name = 'Tahoma'
   Font.Style = []
   ParentFont = False
   OnCreate = WebFormCreate
   OnShow = WebFormShow
   object txtSuggestion: TWebEdit
-    Left = 48
-    Top = 64
-    Width = 850
-    Height = 44
-    Margins.Left = 6
-    Margins.Top = 6
-    Margins.Right = 6
-    Margins.Bottom = 6
+    Left = 24
+    Top = 32
+    Width = 425
+    Height = 22
     ElementClassName = 'form-control'
     ElementFont = efCSS
     HeightStyle = ssAuto
@@ -28,14 +24,10 @@ object FrmMain: TFrmMain
     WidthPercent = 100.000000000000000000
   end
   object txtDetails: TWebMemo
-    Left = 48
-    Top = 160
-    Width = 850
-    Height = 178
-    Margins.Left = 6
-    Margins.Top = 6
-    Margins.Right = 6
-    Margins.Bottom = 6
+    Left = 24
+    Top = 80
+    Width = 425
+    Height = 89
     AutoSize = False
     ElementClassName = 'form-control'
     ElementFont = efCSS
@@ -47,14 +39,10 @@ object FrmMain: TFrmMain
     WidthPercent = 100.000000000000000000
   end
   object txtName: TWebEdit
-    Left = 48
-    Top = 384
-    Width = 850
-    Height = 44
-    Margins.Left = 6
-    Margins.Top = 6
-    Margins.Right = 6
-    Margins.Bottom = 6
+    Left = 24
+    Top = 192
+    Width = 425
+    Height = 22
     ChildOrder = 2
     ElementClassName = 'form-control'
     ElementFont = efCSS
@@ -64,14 +52,10 @@ object FrmMain: TFrmMain
     WidthPercent = 100.000000000000000000
   end
   object txtMail: TWebEdit
-    Left = 48
-    Top = 480
-    Width = 850
-    Height = 44
-    Margins.Left = 6
-    Margins.Top = 6
-    Margins.Right = 6
-    Margins.Bottom = 6
+    Left = 24
+    Top = 240
+    Width = 425
+    Height = 22
     ChildOrder = 3
     ElementClassName = 'form-control'
     ElementFont = efCSS
@@ -81,14 +65,10 @@ object FrmMain: TFrmMain
     WidthPercent = 100.000000000000000000
   end
   object btnSendSuggestion: TWebButton
-    Left = 496
-    Top = 576
-    Width = 402
-    Height = 50
-    Margins.Left = 6
-    Margins.Top = 6
-    Margins.Right = 6
-    Margins.Bottom = 6
+    Left = 248
+    Top = 288
+    Width = 201
+    Height = 25
     Caption = 'Send Suggestion'
     ChildOrder = 4
     ElementClassName = 'btn btn-success'
@@ -99,14 +79,10 @@ object FrmMain: TFrmMain
     OnClick = btnSendSuggestionClick
   end
   object btnReset: TWebButton
-    Left = 48
-    Top = 576
-    Width = 192
-    Height = 50
-    Margins.Left = 6
-    Margins.Top = 6
-    Margins.Right = 6
-    Margins.Bottom = 6
+    Left = 24
+    Top = 288
+    Width = 96
+    Height = 25
     Caption = 'Reset'
     ChildOrder = 4
     ElementClassName = 'btn btn-danger'
