@@ -9,8 +9,8 @@ uses
 type
   TFrmMain = class(TForm)
     txtLog: TMemo;
-    btnDate: TButton;
-    procedure btnDateClick(Sender: TObject);
+    btnTime: TButton;
+    procedure btnTimeClick(Sender: TObject);
   private
     { Private declarations }
     procedure Log( AText: String );
@@ -26,47 +26,21 @@ implementation
 {$R *.dfm}
 
 uses
-  System.DateUtils;
+  System.DateUtils,
+  TimeSpan;
 
-procedure TFrmMain.btnDateClick(Sender: TObject);
+procedure TFrmMain.btnTimeClick(Sender: TObject);
 var
-  LRelease : TDate;
-  LBirthday: TDate;
-  LAdd: TDate;
-
-  LYears: Integer;
-
-  LFormat: TFormatSettings;
-
-  LConvert: TDateTime;
-  LDays: Integer;
+  LDate: TDateTime;
+  LSpan: TTimeSpan;
 
 begin
-  // release date of Delphi: Feb 14, 1995
-  // 14.02.1995
-  // 02.14.1995
-  // 02/14/1995
-  LRelease := EncodeDate(1995, 2, 14 );
-  LBirthday := EncodeDate( 2022, 2, 14 );
+  Log( TTimeZone.Local.GetDisplayName(Now) );
 
-  LYears := YearsBetween( LRelease, LBirthday );
-  Log( Format( '%d years have passed since the release of Delphi 1',
-    [ LYears ] ) );
+  LSpan := TTimeSpan.FromDays(2);
 
 
-  LFormat := TFormatSettings.Create;
-  LFormat.DateSeparator := '-';
-  LFormat.ShortDateFormat := 'yyyy-mm-dd';
-
-  LAdd := IncYear( LRelease, 27 );
-  Log( DateToStr( LAdd, LFormat ) );
-
-  LConvert := StrToDate('1995-02-14', LFormat);
-
-  LDays := DaysBetween( Today, LConvert );
-
-  Log( Format( '%d days have passed since Delphi 1 was released.',
-    [ LDays ] ) );
+  Log( LSpan.TotalHours.ToString );
 end;
 
 procedure TFrmMain.Log(AText: String);
