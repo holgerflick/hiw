@@ -1,19 +1,21 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
-  ClientHeight = 441
-  ClientWidth = 624
+  Caption = 'Cloud Backup Example'
+  ClientHeight = 268
+  ClientWidth = 523
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -19
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
+  PixelsPerInch = 96
   TextHeight = 25
   object CloudStorage: TTMSFNCCloudStorageServices
     Left = 144
-    Top = 136
+    Top = 63
     Width = 26
     Height = 26
     Visible = True
@@ -23,20 +25,21 @@ object Form1: TForm1
     OnGetFolderList = CloudStorageGetFolderList
   end
   object btnConnect: TButton
-    Left = 104
-    Top = 224
+    Left = 8
+    Top = 16
     Width = 113
     Height = 41
-    Caption = 'btnConnect'
+    Caption = 'Connect'
     TabOrder = 1
     OnClick = btnConnectClick
   end
-  object btnList: TButton
-    Left = 104
-    Top = 287
+  object btnDownload: TButton
+    Left = 8
+    Top = 63
     Width = 113
     Height = 41
-    Caption = 'btnList'
+    Caption = 'Download'
     TabOrder = 2
+    OnClick = btnDownloadClick
   end
 end
