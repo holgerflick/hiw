@@ -35,7 +35,6 @@ object Form1: TForm1
       '')
     ReadOnly = True
     TabOrder = 1
-    WordWrap = False
   end
   object btnFromJson: TButton
     Left = 408
