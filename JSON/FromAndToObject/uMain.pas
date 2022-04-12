@@ -4,7 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  System.Generics.Collections
+
+  ;
 
 type
   TCustomer = class
@@ -23,6 +26,8 @@ type
 
   end;
 
+  TCustomers = TList<TCustomer>;
+
 type
   TForm1 = class(TForm)
     btnToJson: TButton;
@@ -35,6 +40,9 @@ type
     { Private declarations }
     procedure GenerateJson;
     procedure GenerateObject;
+
+    procedure GenerateObjects;
+    procedure GenerateJsonArray;
   public
     { Public declarations }
   end;
@@ -52,12 +60,12 @@ uses
 
 procedure TForm1.btnFromJsonClick(Sender: TObject);
 begin
-  GenerateObject;
+  GenerateObjects;
 end;
 
 procedure TForm1.btnToJsonClick(Sender: TObject);
 begin
-  GenerateJson;
+  GenerateJsonArray;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -81,6 +89,39 @@ begin
   end;
 end;
 
+procedure TForm1.GenerateJsonArray;
+var
+  LCustomers: TCustomers;
+  i: Integer;
+  LCustomer: TCustomer;
+  LJson: String;
+begin
+  txtResults.Clear;
+
+  LCustomers := TCustomers.Create;
+  try
+    for i := 1 to 10 do
+    begin
+      LCustomer := TCustomer.RandomCustomer;
+      LCustomer.Name := 'Customer ' + i.ToString;
+
+      LCustomers.Add(LCustomer);
+    end;
+
+    LJson := TJson.ObjectToJsonString(LCustomers,
+      [joDateIsUTC, joIndentCaseCamel]);
+
+    txtResults.Lines.Add(LJson);
+
+  finally
+    for LCustomer in LCustomers do
+    begin
+      LCustomer.Free;
+    end;
+    LCustomers.Free;
+  end;
+end;
+
 procedure TForm1.GenerateObject;
 var
   LCustomer: TCustomer;
@@ -91,9 +132,33 @@ begin
   LLastIdx := txtResults.Lines.Count - 1;
   LJson := txtResults.Lines[ LLastIdx ];
 
-  LCustomer := TJson.JsonToObject<TCustomer>(LJson, [] );
+  LCustomer := TJson.JsonToObject<TCustomer>(LJson, [joDateIsUTC] );
   ShowMessage( 'Customer has ' + LCustomer.TotalOrders.ToString +
     ' orders and ordered last on ' + DateToStr( LCustomer.LastOrder ) + '.' );
+end;
+
+procedure TForm1.GenerateObjects;
+var
+  LCustomers: TCustomers;
+  LJson: String;
+  LAvg: Double;
+  LCustomer: TCustomer;
+
+
+begin
+  LJson := txtResults.Lines.Text;
+
+  LCustomers := TJson.JsonToObject<TCustomers>( LJson, [ joDateIsUTC ] );
+
+  LAvg := 0;
+  for LCustomer in LCustomers do
+  begin
+    LAvg := LAvg + LCustomer.Balance;
+  end;
+
+  LAvg := LAvg / LCustomers.Count;
+
+  ShowMessage( LCustomers.Count.ToString + ' customers read with an average balance of ' + LAvg.ToString );
 end;
 
 { TCustomer }

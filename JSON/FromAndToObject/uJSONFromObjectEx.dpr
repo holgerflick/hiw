@@ -7,6 +7,10 @@ uses
 {$R *.res}
 
 begin
+  {$IF DEBUG}
+  ReportMemoryLeaksOnShutdown := True;
+  {$ENDIF}
+
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TForm1, Form1);
