@@ -132,9 +132,13 @@ begin
   LLastIdx := txtResults.Lines.Count - 1;
   LJson := txtResults.Lines[ LLastIdx ];
 
-  LCustomer := TJson.JsonToObject<TCustomer>(LJson, [joDateIsUTC] );
-  ShowMessage( 'Customer has ' + LCustomer.TotalOrders.ToString +
-    ' orders and ordered last on ' + DateToStr( LCustomer.LastOrder ) + '.' );
+  LCustomer := TJson.JsonToObject<TCustomer>(LJson, [ joDateIsUTC ] );
+  try
+    ShowMessage( 'Customer has ' + LCustomer.TotalOrders.ToString +
+      ' orders and ordered last on ' + DateToStr( LCustomer.LastOrder ) + '.' );
+  finally
+    LCustomer.Free;
+  end;
 end;
 
 procedure TForm1.GenerateObjects;
