@@ -1,4 +1,4 @@
-program uJSONFromObjectEx;
+program JSONFromObjectEx;
 
 uses
   Vcl.Forms,
