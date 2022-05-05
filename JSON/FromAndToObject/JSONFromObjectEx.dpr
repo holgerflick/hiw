@@ -2,7 +2,7 @@ program JSONFromObjectEx;
 
 uses
   Vcl.Forms,
-  uMain in 'uMain.pas' {Form1};
+  uMain in 'uMain.pas' {FrmMain};
 
 {$R *.res}
 
@@ -13,6 +13,6 @@ begin
 
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFrmMain, FrmMain);
   Application.Run;
 end.
