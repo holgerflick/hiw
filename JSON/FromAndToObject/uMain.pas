@@ -8,20 +8,22 @@ uses
   System.Generics.Collections
   ;
 
-
 type
   TYearlyProfits = class(TPersistent)
   private
-    FMonthlyProfit: TArray<Double>;
+    FMonthlyProfit: TList<Double>;
     FYear: Integer;
 
   public
     class function Example: TYearlyProfits;
 
     constructor Create;
+    destructor Destroy; override;
 
+
+  published
     property Year: Integer read FYear write FYear;
-    property MonthlyProfit: TArray<Double> read FMonthlyProfit write FMonthlyProfit;
+    property MonthlyProfit: TList<Double> read FMonthlyProfit write FMonthlyProfit;
   end;
 
 
@@ -111,7 +113,14 @@ end;
 
 constructor TYearlyProfits.Create;
 begin
-  SetLength( FMonthlyProfit, 12 );
+  FMonthlyProfit := TList<Double>.Create;
+end;
+
+destructor TYearlyProfits.Destroy;
+begin
+
+  FMonthlyProfit.Free;
+  inherited;
 end;
 
 class function TYearlyProfits.Example: TYearlyProfits;
@@ -123,9 +132,9 @@ begin
 
   Result.Year := 1979 + RANDOM( 40 );
 
-  for i := 0 to 11 do
+  for i := 1 to 12 do
   begin
-    Result.MonthlyProfit[i] := RANDOM( 200 );
+    Result.MonthlyProfit.Add( RANDOM( 200 ) );
   end;
 
 end;

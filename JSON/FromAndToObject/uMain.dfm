@@ -35,7 +35,6 @@ object FrmMain: TFrmMain
       '')
     ReadOnly = True
     TabOrder = 1
-    ExplicitWidth = 601
   end
   object btnFNCCore: TButton
     Left = 215
