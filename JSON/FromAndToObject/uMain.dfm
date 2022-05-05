@@ -4,7 +4,7 @@ object FrmMain: TFrmMain
   BorderStyle = bsSizeToolWin
   Caption = 'JSON: Create JSON from object and vice versa'
   ClientHeight = 443
-  ClientWidth = 624
+  ClientWidth = 702
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -13,7 +13,7 @@ object FrmMain: TFrmMain
   Font.Style = []
   OnCreate = FormCreate
   DesignSize = (
-    624
+    702
     443)
   TextHeight = 21
   object btnToJson: TButton
@@ -28,22 +28,22 @@ object FrmMain: TFrmMain
   object txtResults: TMemo
     Left = 8
     Top = 88
-    Width = 601
+    Width = 679
     Height = 337
     Anchors = [akLeft, akTop, akRight, akBottom]
     Lines.Strings = (
       '')
     ReadOnly = True
     TabOrder = 1
+    ExplicitWidth = 601
   end
-  object btnFromJson: TButton
-    Left = 408
+  object btnFNCCore: TButton
+    Left = 215
     Top = 32
     Width = 201
     Height = 33
-    Anchors = [akTop, akRight]
-    Caption = 'Convert from JSON'
+    Caption = 'Use FNC Core'
     TabOrder = 2
-    OnClick = btnFromJsonClick
+    OnClick = btnFNCCoreClick
   end
 end
