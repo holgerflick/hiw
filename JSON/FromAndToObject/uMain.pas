@@ -8,20 +8,22 @@ uses
   System.Generics.Collections
   ;
 
-
 type
-  TYearlyProfits = class
+  TYearlyProfits = class(TPersistent)
   private
-    FMonthlyProfit: TArray<Double>;
+    FMonthlyProfit: TList<Double>;
     FYear: Integer;
 
   public
     class function Example: TYearlyProfits;
 
     constructor Create;
+    destructor Destroy; override;
 
+
+  published
     property Year: Integer read FYear write FYear;
-    property MonthlyProfit: TArray<Double> read FMonthlyProfit write FMonthlyProfit;
+    property MonthlyProfit: TList<Double> read FMonthlyProfit write FMonthlyProfit;
   end;
 
 
@@ -29,16 +31,14 @@ type
   TFrmMain = class(TForm)
     btnToJson: TButton;
     txtResults: TMemo;
-    btnFromJson: TButton;
+    btnFNCCore: TButton;
     procedure btnToJsonClick(Sender: TObject);
-    procedure btnFromJsonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnFNCCoreClick(Sender: TObject);
   private
     { Private declarations }
     procedure GenerateJson;
-    procedure GenerateObject;
-
-    procedure GenerateObjects;
+    procedure GenerateJsonFnc;
 
   public
     { Public declarations }
@@ -50,14 +50,15 @@ var
 implementation
 
 uses
+  VCL.TMSFNCTypes,      // FNC type helper
   System.DateUtils,
   REST.Json;
 
 {$R *.dfm}
 
-procedure TFrmMain.btnFromJsonClick(Sender: TObject);
+procedure TFrmMain.btnFNCCoreClick(Sender: TObject);
 begin
-  GenerateObjects;
+  GenerateJsonFNC;
 end;
 
 procedure TFrmMain.btnToJsonClick(Sender: TObject);
@@ -79,8 +80,6 @@ var
   i: Integer;
 
 begin
-
-
   LYears := TObjectList<TYearlyProfits>.Create;
 
   try
@@ -98,30 +97,30 @@ begin
   finally
     LYears.Free;
   end;
-
-
 end;
 
-procedure TFrmMain.GenerateObject;
 
+procedure TFrmMain.GenerateJsonFnc;
+var
+  LProfit: TYearlyProfits;
 
 begin
-
+  LProfit := TYearlyProfits.Example;
+  txtResults.Lines.Add( LProfit.JSON );
 end;
-
-procedure TFrmMain.GenerateObjects;
-
-begin
-
-end;
-
-
 
 { TYearlyProfits }
 
 constructor TYearlyProfits.Create;
 begin
-  SetLength( FMonthlyProfit, 12 );
+  FMonthlyProfit := TList<Double>.Create;
+end;
+
+destructor TYearlyProfits.Destroy;
+begin
+
+  FMonthlyProfit.Free;
+  inherited;
 end;
 
 class function TYearlyProfits.Example: TYearlyProfits;
@@ -133,9 +132,9 @@ begin
 
   Result.Year := 1979 + RANDOM( 40 );
 
-  for i := 0 to 11 do
+  for i := 1 to 12 do
   begin
-    Result.MonthlyProfit[i] := RANDOM( 200 );
+    Result.MonthlyProfit.Add( RANDOM( 200 ) );
   end;
 
 end;
