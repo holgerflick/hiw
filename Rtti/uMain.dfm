@@ -31,7 +31,7 @@ object FrmMain: TFrmMain
     Top = 16
     Width = 161
     Height = 33
-    Caption = 'Button1'
+    Caption = 'Show types'
     TabOrder = 1
     OnClick = Button1Click
   end
