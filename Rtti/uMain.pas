@@ -41,12 +41,28 @@ procedure TFrmMain.Button1Click(Sender: TObject);
 var
   LContext: TRttiContext;
 
-begin
-  var LTypes := LContext.GetPackages;
+  LPackages: TArray<TRttiPackage>;
+  LTypes: TArray<TRttiType>;
 
-  for var LType in LTypes do
-  begin
-    txtResults.Lines.Add( LType.Name );
+begin
+  LContext := TRttiContext.Create;
+  try
+    LPackages := LContext.GetPackages;
+
+    for var LPackage in LPackages do
+    begin
+      txtResults.Lines.Add( LPackage.Name );
+    end;
+
+    LTypes := LContext.GetTypes;
+
+    for var LType in LTypes do
+    begin
+      txtResults.Lines.Add( LType.Name );
+    end;
+
+  finally
+    LContext.Free;
   end;
 end;
 
