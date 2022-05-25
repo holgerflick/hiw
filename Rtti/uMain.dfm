@@ -11,20 +11,28 @@ object FrmMain: TFrmMain
   Font.Height = -16
   Font.Name = 'JetBrains Mono'
   Font.Style = []
-  OnCreate = FormCreate
   DesignSize = (
     702
     443)
   TextHeight = 21
   object txtResults: TMemo
     Left = 8
-    Top = 88
-    Width = 679
-    Height = 337
+    Top = 72
+    Width = 686
+    Height = 363
     Anchors = [akLeft, akTop, akRight, akBottom]
     Lines.Strings = (
       '')
     ReadOnly = True
     TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 16
+    Top = 16
+    Width = 161
+    Height = 33
+    Caption = 'Button1'
+    TabOrder = 1
+    OnClick = Button1Click
   end
 end
