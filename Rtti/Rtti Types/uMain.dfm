@@ -24,15 +24,16 @@ object FrmMain: TFrmMain
     Lines.Strings = (
       '')
     ReadOnly = True
+    ScrollBars = ssVertical
     TabOrder = 0
   end
-  object Button1: TButton
+  object btnShowTypes: TButton
     Left = 16
     Top = 16
     Width = 161
     Height = 33
     Caption = 'Show types'
     TabOrder = 1
-    OnClick = Button1Click
+    OnClick = btnShowTypesClick
   end
 end
