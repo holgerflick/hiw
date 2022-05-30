@@ -54,8 +54,8 @@ var
 begin
   LContext := TRttiContext.Create;
   try
-    LType := LContext.GetType(self.ClassType);
-    LMethod := LType.GetMethod( AName );
+    LType := LContext.GetType( self.ClassType );
+    LMethod := LType.GetMethod(AName);
 
     if Assigned( LMethod ) then
     begin
@@ -63,13 +63,12 @@ begin
     end
     else
     begin
-      ShowMessage( 'Method not found in instance of ' + self.ClassName );
+      ShowMessage( 'Method not found in ' + LType.QualifiedName );
     end;
 
   finally
     LContext.Free;
   end;
-
 end;
 
 procedure TFrmMain.SayAddress;

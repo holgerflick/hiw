@@ -13,8 +13,8 @@ uses
 type
   TFrmMain = class(TForm)
     txtResults: TMemo;
-    Button1: TButton;
-    procedure Button1Click(Sender: TObject);
+    btnShowTypes: TButton;
+    procedure btnShowTypesClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -37,33 +37,62 @@ uses
 {$R *.dfm}
 
 
-procedure TFrmMain.Button1Click(Sender: TObject);
+procedure TFrmMain.btnShowTypesClick(Sender: TObject);
 var
   LContext: TRttiContext;
-
   LPackages: TArray<TRttiPackage>;
+  LPackage: TRttiPackage;
+
   LTypes: TArray<TRttiType>;
+  LType: TRttiType;
+
+  LMethods: TArray<TRttiMethod>;
+  LMethod: TRttiMethod;
+
+  LCount: Integer;
 
 begin
   LContext := TRttiContext.Create;
   try
-    LPackages := LContext.GetPackages;
 
-    for var LPackage in LPackages do
-    begin
-      txtResults.Lines.Add( LPackage.Name );
-    end;
 
-    LTypes := LContext.GetTypes;
+     LPackages := LContext.GetPackages;
+     for LPackage in LPackages do
+     begin
+        txtResults.Lines.Add(LPackage.Name);
+        txtResults.Lines.Add('------------------');
 
-    for var LType in LTypes do
-    begin
-      txtResults.Lines.Add( LType.Name );
-    end;
+        LTypes := LPackage.GetTypes;
+
+        LCount := 0;
+        for LType in LTypes do
+        begin
+          if LType.TypeKind = tkClass then
+          begin
+            Inc( LCount );
+
+            LMethods := LType.GetMethods;
+
+            txtResults.Lines.Add( LType.QualifiedName );
+
+            for LMethod in LMethods do
+            begin
+              txtResults.Lines.Add( '--' + LMethod.Name );
+            end;
+          end;
+
+          if LCount > 8 then
+          begin
+            break;
+          end;
+
+        end;
+     end;
 
   finally
     LContext.Free;
   end;
+
 end;
 
 end.
